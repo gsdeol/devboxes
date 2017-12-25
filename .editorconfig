@@ -25,3 +25,12 @@ indent_style = tab
 
 [*.txt]
 insert_final_newline = false
+
+[*.pp]
+indent_size = 2
+
+[*.erb]
+indent_size = 2
+
+[Vagrantfile]
+indent_size = 2
