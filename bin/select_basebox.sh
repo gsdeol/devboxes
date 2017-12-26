@@ -1,4 +1,3 @@
-#!/bin/bash
 ###############################################################################
 # List available Packer templates and allow the user to select one
 # Globals:

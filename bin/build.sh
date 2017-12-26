@@ -1,11 +1,4 @@
 #!/bin/bash
-set -e
-
-echo "=============="
-echo "Create box"
-echo "Prerequisite:"
-echo "jq"
-echo "=============="
 
 ###############################################################################
 # Script to build a Packer template and optionally deploy it to Vagrant Cloud

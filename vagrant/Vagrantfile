@@ -1,0 +1,31 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+# Config Github Settings
+#github_username = "ivan"
+#github_repo     = "buildscripts"
+#github_branch   = "master"
+#github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "ivanka/mint-mate-18.3"
+
+    config.vm.hostname= "mint-devbox"
+    config.vm.network(:private_network, ip: '10.0.0.5')
+    config.vm.synced_folder ".", "/vagrant", type: "nfs"
+
+    config.vm.provider :virtualbox do |v, override|
+        v.gui = false
+        v.name = "mint-mate-18-devbox"
+
+        v.customize ["modifyvm", :id, "--memory", 4000]
+        v.customize ["modifyvm", :id, "--cpus", 2]
+        v.customize ["modifyvm", :id, "--vram", "256"]
+        v.customize ["modifyvm", :id, "--ioapic", "on"]
+        v.customize ["modifyvm", :id, "--rtcuseutc", "on"]
+        v.customize ["modifyvm", :id, "--accelerate3d", "on"]
+        v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+    end
+
+end

@@ -6,10 +6,10 @@
   "disk_size": "60000",
   "iso_checksum_type": "sha256",
   "iso_checksum": "1ec518ec70d76d9634e22bb9e083546d812f869878a3262fc7ae47ecc5b23e40",
-  "iso_url": "/extras/VM_ISO/linuxmint-18.3-mate-64bit.iso",
+  "iso_url": "file:///extras/VM_ISO/linuxmint-18.3-mate-64bit.iso",
   "memory": "4096",
   "preseed": "mint-18.seed",
-  "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-18.tpl",
+  "vagrantfile_template": "tpl/vagrantfile-mint-mate-18.tpl",
   "version": "1.0.2",
   "version_description": "Linux Mint Mate 18.3 with VirtualBox Guest Additions",
   "vm_name": "mint-mate-18.3"

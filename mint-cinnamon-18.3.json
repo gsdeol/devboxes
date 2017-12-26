@@ -6,7 +6,7 @@
   "disk_size": "60000",
   "iso_checksum_type": "sha256",
   "iso_checksum": "ecebdf9ac4697b6c2d7feffd1bc5430641bca67c7df122fa2914824dc8844b3a",
-  "iso_url": "/extras/VM_ISO/linuxmint-18.3-cinnamon-64bit.iso",
+  "iso_url": "file:///extras/VM_ISO/linuxmint-18.3-cinnamon-64bit.iso",
   "memory": "4096",
   "preseed": "mint-18.seed",
   "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-18.tpl",
