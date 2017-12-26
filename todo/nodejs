@@ -1,0 +1,11 @@
+install nvm!!!
+
+version 6.11
+version 8 and latest
+
+
+npm install -g jshint
+npm install -g eslint
+
+npm install global grunt
+

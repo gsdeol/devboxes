@@ -13,7 +13,8 @@ Vagrant.configure("2") do |config|
 
     config.vm.hostname= "mint-devbox"
     config.vm.network(:private_network, ip: '10.0.0.5')
-    config.vm.synced_folder ".", "/vagrant", type: "nfs"
+    config.vm.synced_folder ".", "/vagrant", type: "rsync"
+
 
     config.vm.provider :virtualbox do |v, override|
         v.gui = false
@@ -27,5 +28,7 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--accelerate3d", "on"]
         v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     end
+
+    config.vm.post_up_message="Setup complete `vagrant ssh` to ssh into the box. vagrant rsync-auto to synchronize work"
 
 end

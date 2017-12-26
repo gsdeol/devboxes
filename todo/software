@@ -1,0 +1,69 @@
+curl
+wget
+tree
+htop
+
+----------
+brew
+docker                   
+docker-compose
+java (java home)
+ 1.8 default
+ 1.9 can be set
+
+ansible
+terraform
+python
+pip (fabric, awscli)
+
+sdkman
+gradle
+groovy
+kotlin
+sbt
+scala
+
+nodejs
+npm
+golang
+git
+maven
+
+
+
+tmux (pull config)
+ohmyzsh (pull config)
+
+keepasxc
+
+(install plank)
+
+awscli
+
+(https://blogs.technet.microsoft.com/jessicadeen/linux/macos-ohmyzsh-tmux-vim-iterm2-powerlevel9k-badass-terminal/)
+vim (with cool plugins)
+
+[material theme](https://www.fossmint.com/material-inspired-themes-icons-for-ubuntu-linux/)
+
+jetbrains toolbox
+https://www.youtube.com/watch?v=kf5mo69twv8
+jetbrains idea if possible
+jetbrains python
+
+
+firewall configuration
+
+visible password asterix
+
+=================NEEDED=========================
+latest dist-upgrade
+clean after all install
+clean history as well
+
+
+
+
+chrome 
+tor
+
+

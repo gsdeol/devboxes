@@ -1,3 +1,10 @@
+# TODO
+
+1. Readme
+
+1. MacOsX with same install
+
+
 [V1](https://github.com/ajxb/packer-linuxmint)
 [V2](https://github.com/r-a-p-a/mint-dev-box)
 
@@ -176,3 +183,6 @@ the following to build Linux Mint 18.2 for all providers:
 ### Acknowledgments
 
 [r-a-p-a](https://github.com/r-a-p-a) for their work in providing the code on which this is based.
+
+
+vagrant rsync-auto
