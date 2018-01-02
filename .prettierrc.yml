@@ -1,0 +1,9 @@
+# .prettierrc
+printWidth: 120
+parser: flow
+singleQuote: true
+useTabs: false
+tabWidth: 4
+trailingComma: es5
+noSemi: true
+rcVerbose: true

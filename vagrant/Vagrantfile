@@ -9,12 +9,15 @@
 #github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 Vagrant.configure("2") do |config|
+    if Vagrant.has_plugin?('vagrant-vbguest')
+       config.vbguest.auto_update = true
+       config.vbguest.no_remote = false
+    end
+
     config.vm.box = "ivanka/mint-mate-18.3"
 
     config.vm.hostname= "mint-devbox"
     config.vm.network(:private_network, ip: '10.0.0.5')
-    config.vm.synced_folder ".", "/vagrant", type: "rsync"
-
 
     config.vm.provider :virtualbox do |v, override|
         v.gui = false
@@ -27,8 +30,12 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--rtcuseutc", "on"]
         v.customize ["modifyvm", :id, "--accelerate3d", "on"]
         v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+        v.customize ["modifyvm", :id, "--description", "Developer Environment"]
     end
 
     config.vm.post_up_message="Setup complete `vagrant ssh` to ssh into the box. vagrant rsync-auto to synchronize work"
 
 end
+
+# vagrant rsync-auto
+# vagrant destroy -f

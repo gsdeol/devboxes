@@ -5,7 +5,7 @@ htop
 
 ----------
 brew
-docker                   
+docker
 docker-compose
 java (java home)
  1.8 default
@@ -63,7 +63,16 @@ clean history as well
 
 
 
-chrome 
+chrome
 tor
 
 
+install nvm npm and global GRUNT
+
+newman
+https://www.getpostman.com/docs/postman/collection_runs/command_line_integration_with_newman
+http://blog.getpostman.com/2014/05/12/meet-newman-a-command-line-companion-for-postman/
+
+
+Ansible Tools
+https://github.com/fboender/ansible-cmdb

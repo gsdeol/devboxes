@@ -11,8 +11,17 @@ indent_size = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+[*.js, **/*.js]
+indent_size = 4
+indent_style = space
+
+[{package.json,.travis.yml}]
+indent_size = 2
+indent_style = space
+
 [*.{json,feature}]
 indent_size = 2
+insert_final_newline = false
 
 # 4 space indentation
 [*.py]
