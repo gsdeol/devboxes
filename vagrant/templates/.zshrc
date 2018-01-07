@@ -14,6 +14,8 @@ echo -ne "\033]12;Blue1\007"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 ZSH_THEME="agnoster"
+# POWERLEVEL9K_MODE='awesome-patched'
+# ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="false"
@@ -57,7 +59,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colorize vagrant zsh-autosuggestions  colored-man zsh-syntax-highlighting)
+plugins=(git colorize zsh-completions zsh-autosuggestions  colored-man zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -133,3 +135,4 @@ prompt_dir() {
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh

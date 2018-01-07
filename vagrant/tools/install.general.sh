@@ -2,18 +2,24 @@
 
 set -xv
 
-install_general() {
+function install_general() {
     echo "====================="
     echo "Install              "
     echo "git tree htop        "
     echo "====================="
+
     sudo apt dist-upgrade -y
     sudo apt update
-    sudo apt install git tree htop nano newman -y
+    sudo apt install git -y
+    cp /vagrant/templates/.gitconfig ~/.gitconfig
+    sudo apt install tree -y
+    sudo apt install htop -y
+    sudo apt install nano -y
+    sudo apt install vim -y
     sudo apt install build-essential -y
 }
 
-install_api_toolchain() {
+function install_api_toolchain() {
     echo "================"
     echo "Install Postman"
     echo "================"
@@ -40,7 +46,7 @@ EOL
     npm install -g newman
 }
 
-install_nvm_node() {
+function install_nvm_node() {
     echo "================"
     echo "Install NVM"
     echo "================"
@@ -65,18 +71,39 @@ install_nvm_node() {
     sudo apt-get clean
 }
 
-install_brew() {
-    echo "================"
-    echo "Install Brew"
-    echo "================"
-    sudo apt install linuxbrew-wrapper -y
-    yes "" | brew doctor
-    brew update
-    sudo sh -c "echo 'export PATH=/home/vagrant/.linuxbrew/bin:$PATH' >> ~/.bash_profile"
+function info() {
+    echo "=================="
+    echo "Current Version of Linux Mint"
+    echo "=================="
+    cat /etc/linuxmint/info
 
+    tree --version
+
+    git --version
+    nvm --version
+
+    node -v
+    java -version
+    scala -version
+    kotlin -version
+    go version
+
+    pip -V
+    mvn --version
+    gradle --version
+
+    newman -v
+
+    htop -v
+    ansible --version
+    puppet --version
+    chef-shell --version
+
+    docker -v
+    docker-compose -v
 }
 
-install_pip() {
+function install_pip() {
     echo "=================="
     echo "Install Python pip"
     echo "=================="
@@ -85,7 +112,7 @@ install_pip() {
     sudo pip install -r requirements.txt
 }
 
-install_sdk_man() {
+function install_sdk_man() {
     echo "=================="
     echo "Install SDK MAN"
     echo "=================="
@@ -102,80 +129,130 @@ install_sdk_man() {
     sdk install scala
 }
 
-install_zsh() {
-    echo "=================="
-    echo "Install ZSH"
-    echo "=================="
-    sudo apt install zsh -y
-    zsh --version
-    sudo chsh -s $(which zsh)
-    sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    sudo cp /vagrant/templates/.zshrc ~/.zshrc
-    sudo cp /vagrant/templates/passwd /etc/passwd
-    #How to run it?
-    # chsh -s $(which zsh)
+function install_go() {
+    sudo apt install golang-go
 }
 
-install_docker() {
-    # NOT YET WROKING!!!
+function install_docker() {
+
     echo "=================="
     echo "Install docker && docker-compose"
     echo "=================="
+    # /etc/apt/sources.list.d
+    #  deb [arch=amd64] https://download.docker.com/linux/ubuntu zesty stable
 
-    sudo apt-get update
-    sudo apt-get remove docker docker-engine docker.io
-        sudo apt-get install \
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+echo 'deb [arch=amd64] https://download.docker.com/linux/ubuntu zesty stable' | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo -k
+sudo sh <<SCRIPT
+    apt-get update
+    apt-get install \
         apt-transport-https \
         ca-certificates \
         curl \
         software-properties-common -y
-    wget -qO- https://get.docker.com/ | sh
-    sudo usermod -aG docker $(whoami)
-   # source ~/.profile
-  #  sudo systemctl enable docker
+
+    apt-get install docker-ce -y
+    usermod -aG docker $(whoami)
+
     echo 'Install Docker-Compose'
-  #  sudo systemctl stop docker
-    sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-#sudo curl --silent -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+    systemctl stop docker
+    curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
     chmod +x  /usr/local/bin/docker-compose
-#sudo mv ~/docker-compose /usr/local/bin/docker-compose
-    docker-compose -v
-    sudo systemctl start docker
-    echo 'Docker Installation completed'
-    sudo apt-get clean
+
+    systemctl start docker
+SCRIPT
 }
 
-install_management_tools() {
+function install_management_tools() {
     echo "=================="
     echo "Install Puppet"
     echo "=================="
 # puppet
 # chef
+curl -L https://omnitruck.chef.io/install.sh | sudo bash
     echo "=================="
     echo "Install Ansible"
     echo "=================="
-    sudo apt-get install software-properties-common -y
+sudo sh <<ANSIBLE
+    apt-get install software-properties-common -y
 
     # add ansible PPA
-    sudo apt-add-repository ppa:ansible/ansible -y
+    apt-add-repository ppa:ansible/ansible -y
     # refresh packages, to make sure ansible package is available
-    sudo apt-get update
-    sudo apt-get install ansible -y
-
+    apt-get update
+    apt-get install ansible -y
     echo 'Ansible installed and hosts provisioned'
-    sudo apt-get clean
+ANSIBLE
 }
 
-main() {
+function install_brew() {
+    echo "================"
+    echo "Install Brew"
+    echo "================"
+    sudo apt install linuxbrew-wrapper -y
+    yes "" | brew doctor
+    brew update
+    sudo sh -c "echo 'export PATH=/home/vagrant/.linuxbrew/bin:$PATH' >> ~/.bash_profile"
+}
+
+
+
+function install_vs_code() {
+    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+    sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+    sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+    sudo apt-get update
+    sudo apt-get install code # or code-insiders
+    mkdir -p $HOME/.config/Code/User/
+    curl -L https://gist.githubusercontent.com/tanzwud/bd1e94b194a9a148b425e7f55991bbd5/raw/a6860d9a285bdefcec547225ba9b8874b0e5345f/settings.json  -o $HOME/.config/Code/User/settings.json
+    curl -L https://gist.githubusercontent.com/tanzwud/bd1e94b194a9a148b425e7f55991bbd5/raw/a6860d9a285bdefcec547225ba9b8874b0e5345f/keybindings.json -o $HOME/.config/Code/User/keybindings.json
+}
+
+function install_jb_tools() {
+    curl -L https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.6.2914.tar.gz -o /tmp/jetbrains-toolbox.tar.gz
+    tar -xf /tmp/jetbrains-toolbox.tar.gz
+    sudo mkdir /develop
+    sudo chown $USER:$USER /develop
+    mkdir /develop/tools
+    mv /tmp/jetbrains-toolbox-1.6.2914/jetbrains-toolbox /develop/tools/jetbrains-toolbox
+    rm -rf /tmp/jetbrains*
+    chmod -R 777 /develop/tools/jetbrains-toolbox
+}
+
+function install_tor() {
+    sudo add-apt-repository ppa:webupd8team/tor-browser -y
+    sudo apt-get update
+    sudo apt-get install tor-browser -y
+}
+
+function clean() {
+    sudo apt-get purge $(dpkg -l linux-{image,headers}-"[0-9]*" | awk '/ii/{print $2}' | grep -ve "$(uname -r | sed -r 's/-[a-z]+//')")
+    sudo apt-get autoclean && sudo apt-get autoremove -y && sudo apt-get clean
+}
+
+function pass_asterix() {
+    sed -i env_reset env_reset,pwfeedback
+}
+
+function main() {
     echo "Main function"
-    # install_general
-    # install_pip
+    install_general
+    install_pip
     # install_zsh
-    # install_nvm_node
-    # install_api_toolchain
-    # install_sdk_man
+    install_vs_code
+    install_jb_tools
+    install_nvm_node
+    install_api_toolchain
+    install_sdk_man
+    install_go
     install_docker
-#    install_management_tools
+    install_management_tools
+
+    clean
+    info
 }
 
 main
+# some git aliases
