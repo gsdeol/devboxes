@@ -87,7 +87,6 @@ function install_vs_code() {
 
 
 function main() {
-
     sudo apt update
     sudo apt install git -y
     echo "Main function"
@@ -98,7 +97,6 @@ function main() {
     install_theme
     install_vim
     install_zsh
-
 }
 
 main
