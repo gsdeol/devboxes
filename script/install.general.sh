@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-set -xv
+#!/usr/bin/env -eux
 
 function install_general() {
     echo "====================="

@@ -80,6 +80,8 @@
         "script/vagrant.sh",
         "script/install_puppet.sh",
         "script/virtualbox.sh",
+        "script/install.general.sh",
+        "script/install.tools.sh",
         "script/motd.sh",
         "script/minimize.sh",
         "script/cleanup.sh",

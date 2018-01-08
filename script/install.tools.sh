@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-set -xv
+#!/usr/bin/env -eux
 
 function install_keepasxc() {
     echo "================="
@@ -90,6 +88,7 @@ function main() {
 
     sudo apt update
     sudo apt install git -y
+
     echo "Main function"
     install_vs_code
     install_keepasxc
